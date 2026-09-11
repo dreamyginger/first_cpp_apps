@@ -11,23 +11,37 @@ CALCOLARE IL MASSIMO TRA I 3 NUMERI E SCRIVERE TUTTI I DATI IN OUTPUT:
 using namespace std;
 
 int main() {
-    int x; int y; int z; int max;
+    int x; int y; int z; int MaxNUM;
     cout << "Inserire il primo numero: ";
     cin >> x;
-    cout << "Inserire il secondo numero: ";
+    y_choice:
+    cout << "Inserire il secondo numero, diverso dal precedente: ";
     cin >> y;
-    cout << "Inserire il terzo numero: ";
+
+    while (y == x) {
+        goto y_choice;
+    };
+    
+    z_choice:
+    cout << "Inserire il terzo numero, diverso dai precedenti: ";
     cin >> z;
 
-    if (x > y, x > z) {
-        x = max;
-    }
-    else if (y > x, y > z) {
-        y = max;
-    }
-    else {
-        z = max;
+    while (z == y || z == x) {
+        goto z_choice;
     }
 
-    cout << "Primo numero: " << x << "\nSecondo numero: " << y << "\nTerzo Numero" << z << "\nMassimo:" << max;
+    if (x > y && x > z) {
+        x = MaxNUM;
+    }
+    else if (y > x && y > z) {
+        y = MaxNUM;
+    }
+    else if (z > x && z > y) {
+        z = MaxNUM;
+    }
+    else {
+        cout << "Error";
+    }
+
+    cout << "Primo numero: " << x << "\nSecondo numero: " << y << "\nTerzo Numero: " << z << "\nMassimo: " << MaxNUM;
 }
