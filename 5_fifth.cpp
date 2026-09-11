@@ -18,6 +18,7 @@ int main() {
     cout << "Inserire il secondo numero, diverso dal precedente: ";
     cin >> y;
 
+
     while (y == x) {
         goto y_choice;
     };
@@ -30,18 +31,15 @@ int main() {
         goto z_choice;
     }
 
-    if (x > y && x > z) {
-        x = MaxNUM;
+
+    MaxNUM = x;
+    if (y > x) {
+        MaxNUM = y;
     }
-    else if (y > x && y > z) {
-        y = MaxNUM;
+    if (z > y) {
+        MaxNUM = z;
     }
-    else if (z > x && z > y) {
-        z = MaxNUM;
-    }
-    else {
-        cout << "Error";
-    }
+    
 
     cout << "Primo numero: " << x << "\nSecondo numero: " << y << "\nTerzo Numero: " << z << "\nMassimo: " << MaxNUM;
 }
