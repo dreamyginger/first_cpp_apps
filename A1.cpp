@@ -19,21 +19,72 @@ PER COGNOME
 using namespace std;
 
 int main() {
-    int matricola;
-    string nome;
-    string cognome;
-    int anno;
-    char sezione;
-    string indirizzo;
-    float voti[5];
+    int matricola[3][1];
+    string anagrafe[3][2];
+    int anno[3][1];
+    char sezione[3][1];
+    string indirizzo[3][1];
+    int votoAsk;
+    float voti[3][5];
+    bool studente1 = false;
+    bool studente2 = false;
+    bool studente3 = false;
+    int studenteSelect = 1;
+    string ordinale[3] = {"PRIMO", "SECONDO", "TERZO"};
+    string ordinaleTrue;
+    int ordinaleNum;
 
+    ordinaleNum = 0; 
+    ordinaleTrue = ordinale[ordinaleNum];
+
+    richiesta_dati_studente:
+    cout << "== DATI DEL " << ordinaleTrue << " STUDENTE ==\nNome: ";
+    cin >> anagrafe[ordinaleNum][1];
+    cout << "== DATI DEL " << ordinaleTrue << " STUDENTE == \nCognome: ";
+    cin >> anagrafe[ordinaleNum][2];
+    cout << "== DATI DEL " << ordinaleTrue << " STUDENTE == \nMatricola: ";
+    cin >> matricola[ordinaleNum][1];
+
+    cout << "== DATI DEL " << ordinaleTrue << " STUDENTE == \nQuanti voti si vogliono registrare? (Inserire un numero da 1 a 5)\n";
+    cin >> votoAsk;
+
+    if (votoAsk == 1) {
+        cout << "== DATI DEL " << ordinaleTrue << " STUDENTE == \nInserire voto: ";
+        cin >> voti[ordinaleNum][0];
+    }
+    else if (votoAsk >= 2) {
+        cout << "== DATI DEL " << ordinaleTrue << " STUDENTE == \nInserire primo voto: ";
+        cin >> voti[ordinaleNum][0];
+        cout << "== DATI DEL " << ordinaleTrue << " STUDENTE == \nInserire secondo voto: ";
+        cin >> voti[ordinaleNum][1];
+    } if (votoAsk >= 3) {
+        cout << "== DATI DEL " << ordinaleTrue << " STUDENTE == \nInserire terzo voto: ";
+        cin >> voti[ordinaleNum][2]; 
+    } if (votoAsk >= 4) {
+        cout << "== DATI DEL " << ordinaleTrue << " STUDENTE == \nInserire quarto voto: ";
+        cin >> voti[ordinaleNum][3]; 
+    } if (votoAsk == 5) {
+        cout << "== DATI DEL " << ordinaleTrue << " STUDENTE == \nInserire quinto voto: ";
+        cin >> voti[ordinaleNum][4]; 
+    }
+
+    studenteSelect = studenteSelect + 1;
+    ordinaleNum = ordinaleNum + 1;
+    ordinaleTrue = ordinale[ordinaleNum];
     
-    /* string studenteanagrafe[2] {nome, cognome}; */
-
-
-    cout << "== DATI DEL PRIMO STUDENTE ==\nNome:";
-    cin >> nome;
-    cout << "== DATI DEL PRIMO STUDENTE == \nCognome:";
-    cin >> cognome;
+    goto richiesta_dati_studente; /*Per il 2ndo studente*/
+    goto richiesta_dati_studente; /*Per il 3zo studente*/
 
 }
+
+
+
+/*
+cosa 1 (1)
+
+cosa 2 (1, 2)
+cosa 3 (1, 2, 3)
+
+
+1, 2 sempre. 3 solo se cosa 3
+*/
