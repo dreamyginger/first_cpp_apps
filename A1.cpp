@@ -19,13 +19,13 @@ PER COGNOME
 using namespace std;
 
 int main() {
-    int matricola[3][1];
-    string anagrafe[3][2];
-    int anno[3][1];
-    char sezione[3][1];
-    string indirizzo[3][1];
+    int matricola[3];
+    string anagrafe[3][1];
+    int anno[3];
+    char sezione[3];
+    string indirizzo[3];
     int votoAsk;
-    float voti[3][5];
+    float voti[3][4];
     bool studente1 = false;
     bool studente2 = false;
     bool studente3 = false;
@@ -33,66 +33,52 @@ int main() {
     string ordinaleTrue;
     int ordinaleNum;
 
-    ordinaleNum = 0; 
-    ordinaleTrue = ordinale[ordinaleNum];
+    for (ordinaleNum = 0, ordinaleTrue = ordinale[ordinaleNum]; ordinaleNum <= 2; ordinaleNum = ordinaleNum + 1, ordinaleTrue = ordinale[ordinaleNum]) {
+        cout << "\n== DATI DEL " << ordinaleTrue << " STUDENTE ==\nNome: ";
+        cin >> anagrafe[ordinaleNum][0];
+        cout << "Cognome: ";
+        cin >> anagrafe[ordinaleNum][1];
+        cout << "Numero di matricola: ";
+        cin >> matricola[ordinaleNum];
+        cout << "Anno: ";
+        cin >> anno[ordinaleNum];
+        cout << "Sezione: ";
+        cin >> sezione[ordinaleNum];
+        cout << "Indirizzo: ";
+        cin >> indirizzo[ordinaleNum];
 
-    richiesta_dati_studente:
-    cout << "\n== DATI DEL " << ordinaleTrue << " STUDENTE ==\nNome: ";
-    cin >> anagrafe[ordinaleNum][1];
-    cout << "Cognome: ";
-    cin >> anagrafe[ordinaleNum][2];
-    cout << "Numero di matricola: ";
-    cin >> matricola[ordinaleNum][1];
-    cout << "Anno: ";
-    cin >> anno[ordinaleNum][1];
-    cout << "Sezione: ";
-    cin >> sezione[ordinaleNum][1];
-    cout << "Indirizzo: ";
-    cin >> indirizzo[ordinaleNum][1];
-
-    cout << "Quanti voti si vogliono registrare? (Inserire un numero da 1 a 5): ";
-    cin >> votoAsk;
-
-    if (votoAsk == 1) {
-        cout << "Inserire voto: ";
-        cin >> voti[ordinaleNum][0];
-    }
-    else if (votoAsk >= 2) {
-        cout << "Inserire primo voto: ";
-        cin >> voti[ordinaleNum][0];
-        cout << "Inserire secondo voto: ";
-        cin >> voti[ordinaleNum][1];
-    } if (votoAsk >= 3) {
-        cout << "Inserire terzo voto: ";
-        cin >> voti[ordinaleNum][2]; 
-    } if (votoAsk >= 4) {
-        cout << "Inserire quarto voto: ";
-        cin >> voti[ordinaleNum][3]; 
-    } if (votoAsk == 5) {
-        cout << "Inserire quinto voto: ";
-        cin >> voti[ordinaleNum][4]; 
-    }
-
-    ordinaleNum = ordinaleNum + 1;
-    ordinaleTrue = ordinale[ordinaleNum];
+        cout << "Quanti voti si vogliono registrare? (Inserire un numero da 1 a 5): ";
+        cin >> votoAsk;
     
-    goto richiesta_dati_studente; /*Per il 2ndo studente*/
-    goto richiesta_dati_studente; /*Per il 3zo studente*/
+        if (votoAsk == 1) {
+            cout << "Inserire voto: ";
+            cin >> voti[ordinaleNum][0];
+        }
+        else if (votoAsk >= 2) {
+            cout << "Inserire primo voto: ";
+            cin >> voti[ordinaleNum][0];
+            cout << "Inserire secondo voto: ";
+            cin >> voti[ordinaleNum][1];
+        } if (votoAsk >= 3) {
+            cout << "Inserire terzo voto: ";
+            cin >> voti[ordinaleNum][2]; 
+        } if (votoAsk >= 4) {
+            cout << "Inserire quarto voto: ";
+            cin >> voti[ordinaleNum][3]; 
+        } if (votoAsk == 5) {
+            cout << "Inserire quinto voto: ";
+            cin >> voti[ordinaleNum][4]; 
+        }
+    }
 
-    /* OUTPUT */
-    ordinaleNum = 0;
-    ordinaleTrue = ordinale[ordinaleNum];
+    // FOR LOOP PER OUTPUT STUDENTI
+    for (ordinaleNum = 0, ordinaleTrue = ordinale[ordinaleNum]; ordinaleNum <= 2; ordinaleNum = ordinaleNum + 1, ordinaleTrue = ordinale[ordinaleNum]) {
 
-    dati_studenteOUT:
-    cout << "== DATI DEL " << ordinaleTrue << " STUDENTE ==\nNome: " << anagrafe[ordinaleNum][1] << "\nCognome: " << anagrafe [ordinaleNum][2];
-    cout << "\nNumero di matricola: " << matricola[ordinaleNum][1] << "\nClasse: " << anno[ordinaleNum][1] << sezione[ordinaleNum][1] << "\nIndirizzo: " << indirizzo[ordinaleNum][1];
-
-    ordinaleNum = ordinaleNum + 1;
-    ordinaleTrue = ordinale[ordinaleNum];
-
-    goto dati_studenteOUT; // stud 2
-    goto dati_studenteOUT; // stud 3
-
+        cout << "== DATI DEL " << ordinaleTrue << " STUDENTE ==\nNome: " << anagrafe[ordinaleNum][1] << "\nCognome: " << anagrafe [ordinaleNum][2];
+        cout << "\nNumero di matricola: " << matricola[ordinaleNum] << "\nClasse: " << anno[ordinaleNum] << sezione[ordinaleNum] << "\nIndirizzo: " << indirizzo[ordinaleNum];
+    
+    }
+    
     // SELECTION SORT vvv
     
     int anagrafeVAL = sizeof(anagrafe) / sizeof(anagrafe[0][1]); // GET ARRAY SIZE
