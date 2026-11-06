@@ -1,4 +1,4 @@
-// Develop a program that can arrange students' info, using a struct array.
+// Develop a program that can arrange students' info, using a struct array. !! results in segmentation fault....
 // Structure will contain: registration number, name, surname, year, branch, grade array.
 // The program must present a menu that includes:
 // A. Insert a new student's data (without grades);
@@ -14,27 +14,73 @@
 #include <vector>
 using namespace std;
 
-struct student {
+class student {
 
     private:
-    int regNum;
+
+    int regNum = 1;
     string name;
     string surname;
     int year;
-    int branch;
-    vector<float> grade;
+    char section;
+    float grades[];
 
     public:
-    student(int regNum, string name, string surname, int year, int branch, vector<float> grade) {
+
+    student() {}
+
+    student(int regNum, string name, string surname, int year, char section, float grades[]) {
+        
         this->regNum = regNum;
         this->name = name;
         this->surname = surname;
         this->year = year;
-        this->branch = branch;
-        this->grade = grade;
+        this->section = section;
+        this->grades[regNum] = grades[regNum];
     }
-    
+
     void getStudentData() {
+
+            cout << "\nName: ";
+            cin >> this->name;
+            cout << "\nSurname: ";
+            cin >> this->surname;
+            cout << "\nYear: ";
+            cin >> this->year;
+            cout << "\nSection: ";
+            cin >> this->section;
+    }
+
+    int regNumIncrease() {
+
+        regNum = regNum + 1;
+    }
+
+    void debugPrint1() {
+        cout << this->name, this->surname, this->year, this->section;
+    }
+
+};
+
+int main() {
+
+    vector<student> students;
+
+    student registeringStudent;
+
+    cout << "\nInsert student data";
+
+    registeringStudent.getStudentData();
+
+    students.push_back(registeringStudent);
+
+
+
+
+}
+
+/*
+void getStudentData() {
         cout << "Name: ";
         cin >> this->name;
         cout << "Surname: ";
@@ -44,33 +90,6 @@ struct student {
         cout << "Branch: ";
         cin >> this->branch;
     }
-
-    string getFullName() {
-        return this->name + " " + this->surname; 
-    }
-
-    int assignRegNum() {
-        return this->regNum = ++this->regNum;
-    }
-
-    void debugPrint() {
-
-        cout << this->getFullName() << "\n";
-        cout << this->assignRegNum();
-        
-    }
-
-} registeringStudent;
-
-int main() {
-
-    for (int i = 0; i < 2; ++i) {
-        
-        registeringStudent.getStudentData();
-
-        registeringStudent.debugPrint();
-    }
-
-};
+*/
 
 // cout << "== STUDENTS' REGISTER ==\nPlease choose an option:\nA - Register a new student\nB - Register grade\nC - View a student's details\nD - View a class' students\nE - View the best student's details\nX - Exit\n";
