@@ -18,7 +18,7 @@ class student {
 
     private:
 
-    int regNum = 1;
+    int regNum = 0;
     string name;
     string surname;
     int year;
@@ -41,23 +41,24 @@ class student {
 
     void getStudentData() {
 
-            cout << "Name: ";
-            cin >> this->name;
-            cout << "Surname: ";
-            cin >> this->surname;
-            cout << "Year: ";
-            cin >> this->year;
-            cout << "Section: ";
-            cin >> this->section;
+        cout << "Name: ";
+        cin >> this->name;
+        cout << "Surname: ";
+        cin >> this->surname;
+        cout << "Year: ";
+        cin >> this->year;
+        cout << "Section: ";
+        cin >> this->section;
+
     }
 
-    void regNumIncrease() {
+    int regNumIncrease() {
 
-        regNum = regNum + 1;
+        return this->regNum = this->regNum + 1;
     }
 
     void debugPrint1() {
-        cout << this->name << this->surname << this->year << this->section;
+        cout << this->name << this->surname << this->year << this->section << "\n" << this->regNum << "\n";
     }
 
 };
@@ -66,30 +67,33 @@ int main() {
 
     vector<student> students;
 
-    student registeringStudent;
+    for (int i = 0; i < 2; ++i) {
 
-    cout << "Insert student data\n";
+        student registeringStudent;
 
-    registeringStudent.getStudentData();
+        cout << "Insert student data\n";
 
-    students.push_back(registeringStudent);
+        registeringStudent.getStudentData();
 
-    students.at(0).debugPrint1();
+        registeringStudent.regNumIncrease();
 
+        students.push_back(registeringStudent);
 
-}
-
-/*
-void getStudentData() {
-        cout << "Name: ";
-        cin >> this->name;
-        cout << "Surname: ";
-        cin >> this->surname;
-        cout << "Year: ";
-        cin >> this->year;
-        cout << "Branch: ";
-        cin >> this->branch;
     }
-*/
+
+    for (int i = 0; 1 < students.size(); ++i) {
+        students.at(i).debugPrint1();
+    }
+    /*
+    int regNumAsk;
+
+    cout << "Please insert a registration number to register grades: ";
+    cin >> regNumAsk;
+
+    if (regNumAsk == students.name) {
+
+    }
+    */
+}
 
 // cout << "== STUDENTS' REGISTER ==\nPlease choose an option:\nA - Register a new student\nB - Register grade\nC - View a student's details\nD - View a class' students\nE - View the best student's details\nX - Exit\n";
