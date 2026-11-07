@@ -23,41 +23,41 @@ class student {
     string surname;
     int year;
     char section;
-    float grades[];
+    vector<float> grades;
 
     public:
 
     student() {}
 
-    student(int regNum, string name, string surname, int year, char section, float grades[]) {
+    student(int regNum, string name, string surname, int year, char section, vector<float> grades) {
         
         this->regNum = regNum;
         this->name = name;
         this->surname = surname;
         this->year = year;
         this->section = section;
-        this->grades[regNum] = grades[regNum];
+        this->grades = grades;
     }
 
     void getStudentData() {
 
-            cout << "\nName: ";
+            cout << "Name: ";
             cin >> this->name;
-            cout << "\nSurname: ";
+            cout << "Surname: ";
             cin >> this->surname;
-            cout << "\nYear: ";
+            cout << "Year: ";
             cin >> this->year;
-            cout << "\nSection: ";
+            cout << "Section: ";
             cin >> this->section;
     }
 
-    int regNumIncrease() {
+    void regNumIncrease() {
 
         regNum = regNum + 1;
     }
 
     void debugPrint1() {
-        cout << this->name, this->surname, this->year, this->section;
+        cout << this->name << this->surname << this->year << this->section;
     }
 
 };
@@ -68,13 +68,13 @@ int main() {
 
     student registeringStudent;
 
-    cout << "\nInsert student data";
+    cout << "Insert student data\n";
 
     registeringStudent.getStudentData();
 
     students.push_back(registeringStudent);
 
-
+    students.at(0).debugPrint1();
 
 
 }
