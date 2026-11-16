@@ -49,16 +49,13 @@ class student {
         cin >> this->year;
         cout << "Section: ";
         cin >> this->section;
+        cout << "Registration number: ";
+        cin >> this->regNum;
 
-    }
-
-    int regNumIncrease() {
-
-        return this->regNum = this->regNum + 1;
     }
 
     void debugPrint1() {
-        cout << this->name << this->surname << this->year << this->section << "\n" << this->regNum << "\n";
+        cout << this->name << this->surname << this->year << this->section << this->regNum << "\n";
     }
 
 };
@@ -67,21 +64,15 @@ int main() {
 
     vector<student> students;
 
-    for (int i = 0; i < 2; ++i) {
+    student registeringStudent;
 
-        student registeringStudent;
+    cout << "Insert student data\n";
 
-        cout << "Insert student data\n";
+    registeringStudent.getStudentData();
 
-        registeringStudent.getStudentData();
+    students.push_back(registeringStudent);
 
-        registeringStudent.regNumIncrease();
-
-        students.push_back(registeringStudent);
-
-    }
-
-    for (int i = 0; 1 < students.size(); ++i) {
+    for (int i = 0; 1 <= students.size(); ++i) {
         students.at(i).debugPrint1();
     }
     /*
