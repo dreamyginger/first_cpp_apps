@@ -24,14 +24,14 @@ struct students {
     char section;
     vector<float> grades;
 
-    void (*getStudentData1A) (int, struct students *);
-    void (*debugPrint1A) (int, struct students *);
+    void (*getStudentData1A) (struct students *, int);
+    void (*debugPrint1A) (struct students *, int);
 
 };
 
 students studentSelect[10]; // MAX 10 STUDENTS
 
-    void getStudentData(int i, struct students *studentSelect) {
+    void getStudentData(struct students *studentSelect, int i) {
 
         cout << "Name: ";
         cin >> studentSelect[i].name;
@@ -46,7 +46,7 @@ students studentSelect[10]; // MAX 10 STUDENTS
 
     }
 
-    void debugPrint1(int i, struct students *studentSelect) {
+    void debugPrint1(struct students *studentSelect, int i) {
     
         cout << studentSelect[i].name << studentSelect[i].surname << studentSelect[i].year << studentSelect[i].section << studentSelect[i].regNum << "\n";
     }
@@ -59,13 +59,13 @@ int main() {
 
     for (int i = 0; i <= 1; ++i) {
         
-    getStudentData(i, studentSelect);
+    getStudentData(studentSelect, i);
 
     }
 
     for (int i = 0; i <= 1; ++i) {
 
-    debugPrint1(i, studentSelect);
+    debugPrint1(studentSelect, i);
 
     }
 
