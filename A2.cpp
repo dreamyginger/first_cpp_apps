@@ -1,4 +1,4 @@
-// Develop a program that can arrange students' info, using a struct array. !! results in segmentation fault....
+// Develop a program that can arrange students' info, using a struct array.
 // Structure will contain: registration number, name, surname, year, branch, grade array.
 // The program must present a menu that includes:
 // A. Insert a new student's data (without grades);
@@ -14,10 +14,9 @@
 #include <vector>
 using namespace std;
 
-class student {
+struct students {
 
-    private:
-
+    public:
     int regNum = 0;
     string name;
     string surname;
@@ -25,66 +24,51 @@ class student {
     char section;
     vector<float> grades;
 
-    public:
-
-    student() {}
-
-    student(int regNum, string name, string surname, int year, char section, vector<float> grades) {
-        
-        this->regNum = regNum;
-        this->name = name;
-        this->surname = surname;
-        this->year = year;
-        this->section = section;
-        this->grades = grades;
-    }
-
-    void getStudentData() {
-
-        cout << "Name: ";
-        cin >> this->name;
-        cout << "Surname: ";
-        cin >> this->surname;
-        cout << "Year: ";
-        cin >> this->year;
-        cout << "Section: ";
-        cin >> this->section;
-        cout << "Registration number: ";
-        cin >> this->regNum;
-
-    }
-
-    void debugPrint1() {
-        cout << this->name << this->surname << this->year << this->section << this->regNum << "\n";
-    }
+    void (*getStudentData1A) (int, struct students *);
+    void (*debugPrint1A) (int, struct students *);
 
 };
 
+students studentSelect[10]; // MAX 10 STUDENTS
+
+    void getStudentData(int i, struct students *studentSelect) {
+
+        cout << "Name: ";
+        cin >> studentSelect[i].name;
+        cout << "Surname: ";
+        cin >> studentSelect[i].surname;
+        cout << "Year: ";
+        cin >> studentSelect[i].year;
+        cout << "Section: ";
+        cin >> studentSelect[i].section;
+        cout << "Registration number: ";
+        cin >> studentSelect[i].regNum;
+
+    }
+
+    void debugPrint1(int i, struct students *studentSelect) {
+    
+        cout << studentSelect[i].name << studentSelect[i].surname << studentSelect[i].year << studentSelect[i].section << studentSelect[i].regNum << "\n";
+    }
+
 int main() {
+    
+    int i;
+    studentSelect[i].getStudentData1A = getStudentData;
+    studentSelect[i].debugPrint1A = debugPrint1;
 
-    vector<student> students;
-
-    student registeringStudent;
-
-    cout << "Insert student data\n";
-
-    registeringStudent.getStudentData();
-
-    students.push_back(registeringStudent);
-
-    for (int i = 0; 1 <= students.size(); ++i) {
-        students.at(i).debugPrint1();
-    }
-    /*
-    int regNumAsk;
-
-    cout << "Please insert a registration number to register grades: ";
-    cin >> regNumAsk;
-
-    if (regNumAsk == students.name) {
+    for (int i = 0; i <= 1; ++i) {
+        
+    getStudentData(i, studentSelect);
 
     }
-    */
+
+    for (int i = 0; i <= 1; ++i) {
+
+    debugPrint1(i, studentSelect);
+
+    }
+
 }
 
 // cout << "== STUDENTS' REGISTER ==\nPlease choose an option:\nA - Register a new student\nB - Register grade\nC - View a student's details\nD - View a class' students\nE - View the best student's details\nX - Exit\n";
