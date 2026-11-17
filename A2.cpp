@@ -33,6 +33,7 @@ students studentSelect[10]; // MAX 10 STUDENTS
 
     void getStudentData(struct students *studentSelect, int i) {
 
+        cout << "== REGISTERING STUDENT NO." << i + 1 << " ==\n"; // i starts from 0
         cout << "Name: ";
         cin >> studentSelect[i].name;
         cout << "Surname: ";
@@ -48,7 +49,8 @@ students studentSelect[10]; // MAX 10 STUDENTS
 
     void debugPrint1(struct students *studentSelect, int i) {
     
-        cout << studentSelect[i].name << studentSelect[i].surname << studentSelect[i].year << studentSelect[i].section << studentSelect[i].regNum << "\n";
+        cout << "== PRINTING STUDENT NO." << i + 1 << "==\n";
+        cout << studentSelect[i].name << " " << studentSelect[i].surname << " " << studentSelect[i].year << " " << studentSelect[i].section << " " << studentSelect[i].regNum << "\n";
     }
 
 int main() {
