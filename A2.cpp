@@ -56,21 +56,61 @@ students studentSelect[10]; // MAX 10 STUDENTS
 int main() {
     
     int i;
+    // defining functions
     studentSelect[i].getStudentData1A = getStudentData;
     studentSelect[i].debugPrint1A = debugPrint1;
 
-    for (int i = 0; i <= 1; ++i) {
+
+    programstart:
+    cout << "== STUDENTS' REGISTER ==\nPlease choose an option:\nA - Register a new student\nB - Register grade\nC - View a student's details\nD - View a class' students\nE - View the best student's details\nX - Exit\n";
+    string input[12] = {"A", "a", "B", "b", "C", "c", "D", "d", "E", "e", "X", "x"};
+    string inputAsk;
+    cin >> inputAsk;
+    if (inputAsk == input[0] || inputAsk == input[1]) { // "A" or "a" - INSERT STUDENT DATA (A)
         
-    getStudentData(studentSelect, i);
+        for (int i = 0; i <= 1; ++i) {
+        
+            getStudentData(studentSelect, i);
+
+        }
+
+    } else if (inputAsk == input[2] || inputAsk == input[3]) { // - INSERT STUDENT GRADES (B)
+
+        // B. Insert a grade to a reg-num-identified student;
+
+        // APPROACH:
+        // 1. Ask for regnum until a valid one is entered,
+        // 2. Ask grade amount "n" the user wants to register,
+        // 3. Insert n grades to the student
+
+
+
+    } else if (inputAsk == input[4] || inputAsk == input[5]) { // - PRINT STUDENT DETAILS (C)
+
+        
+
+    } else if (inputAsk == input[6] || inputAsk == input[7]) { // - PRINT DETAILS FOR CLASS (D)
+
+
+
+    } else if (inputAsk == input[8] || inputAsk == input[9]) { // - PRINT STUDENT W/ BEST AVERAGE (E)
+
+
+
+    } else if (inputAsk == input[10] || inputAsk == input[11]) { // - END PROGRAM (X)
+
+        return 0;
 
     }
 
+    
+
+    /*
     for (int i = 0; i <= 1; ++i) {
 
     debugPrint1(studentSelect, i);
 
     }
+    */
 
 }
-
-// cout << "== STUDENTS' REGISTER ==\nPlease choose an option:\nA - Register a new student\nB - Register grade\nC - View a student's details\nD - View a class' students\nE - View the best student's details\nX - Exit\n";
