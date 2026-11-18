@@ -24,57 +24,72 @@ struct students {
     char section;
     vector<float> grades;
 
-    void (*getStudentData1A) (struct students *, int);
-    void (*debugPrint1A) (struct students *, int);
+    void (*getStudentDataMAIN) (struct students *, int);
+    void (*debugPrint1MAIN) (struct students *, int);
+    string (*getStudentFullNameMAIN) (struct students *, int);
 
 };
 
 students studentSelect[10]; // MAX 10 STUDENTS
 
-    void getStudentData(struct students *studentSelect, int i) {
+// FUNCTIONS
 
-        cout << "== REGISTERING STUDENT NO." << i + 1 << " ==\n"; // i starts from 0
-        cout << "Name: ";
-        cin >> studentSelect[i].name;
-        cout << "Surname: ";
-        cin >> studentSelect[i].surname;
-        cout << "Year: ";
-        cin >> studentSelect[i].year;
-        cout << "Section: ";
-        cin >> studentSelect[i].section;
-        cout << "Registration number: ";
-        cin >> studentSelect[i].regNum;
+void getStudentData(struct students *studentSelect, int i) {
 
-    }
+    cout << "== REGISTERING STUDENT NO." << i + 1 << " ==\n"; // i starts from 0
+    cout << "Name: ";
+    cin >> studentSelect[i].name;
+    cout << "Surname: ";
+    cin >> studentSelect[i].surname;
+    cout << "Year: ";
+    cin >> studentSelect[i].year;
+    cout << "Section: ";
+    cin >> studentSelect[i].section;
+    cout << "Registration number: ";
+    cin >> studentSelect[i].regNum;
 
-    void debugPrint1(struct students *studentSelect, int i) {
+}
+
+void debugPrint1(struct students *studentSelect, int i) {
     
-        cout << "== PRINTING STUDENT NO." << i + 1 << "==\n";
-        cout << studentSelect[i].name << " " << studentSelect[i].surname << " " << studentSelect[i].year << " " << studentSelect[i].section << " " << studentSelect[i].regNum << "\n";
-    }
+    cout << "== PRINTING STUDENT NO." << i + 1 << "==\n";
+    cout << studentSelect[i].name << " " << studentSelect[i].surname << " " << studentSelect[i].year << " " << studentSelect[i].section << " " << studentSelect[i].regNum << "\n";
+}
+
+string getStudentFullName(struct students *studentSelect, int i) {
+
+    return studentSelect[i].name + " " + studentSelect[i].surname;
+}
 
 int main() {
     
     int i;
     // defining functions
-    studentSelect[i].getStudentData1A = getStudentData;
-    studentSelect[i].debugPrint1A = debugPrint1;
+    studentSelect[i].getStudentDataMAIN = getStudentData;
+    studentSelect[i].debugPrint1MAIN = debugPrint1;
+    studentSelect[i].getStudentFullNameMAIN = getStudentFullName;
 
+    while (true) {
 
-    programstart:
-    cout << "== STUDENTS' REGISTER ==\nPlease choose an option:\nA - Register a new student\nB - Register grade\nC - View a student's details\nD - View a class' students\nE - View the best student's details\nX - Exit\n";
-    string input[12] = {"A", "a", "B", "b", "C", "c", "D", "d", "E", "e", "X", "x"};
-    string inputAsk;
-    cin >> inputAsk;
-    if (inputAsk == input[0] || inputAsk == input[1]) { // "A" or "a" - INSERT STUDENT DATA (A)
+        programstart:
+        cout << "== STUDENTS' REGISTER ==\nPlease choose an option:\nA - Register a new student\nB - Register grade\nC - View a student's details\nD - View a class' students\nE - View the best student's details\nX - Exit\n";
+        string input[12] = {"A", "a", "B", "b", "C", "c", "D", "d", "E", "e", "X", "x"};
+        string inputAsk;
+        cin >> inputAsk;
+
+        if (inputAsk == input[0] || inputAsk == input[1]) { // "A" or "a" - INSERT STUDENT DATA (A)
         
-        for (int i = 0; i <= 1; ++i) {
+            for (int i = 0; i < 1; ++i) {
         
-            getStudentData(studentSelect, i);
+                getStudentData(studentSelect, i);
 
-        }
+                cout << "STUDENT '" << getStudentFullName(studentSelect, i) << "' HAS BEEN REGISTERED SUCCESSFULLY.\n";
 
-    } else if (inputAsk == input[2] || inputAsk == input[3]) { // - INSERT STUDENT GRADES (B)
+            }
+
+            goto programstart;
+
+        } else if (inputAsk == input[2] || inputAsk == input[3]) { // - INSERT STUDENT GRADES (B)
 
         // B. Insert a grade to a reg-num-identified student;
 
@@ -83,30 +98,39 @@ int main() {
         // 2. Ask grade amount "n" the user wants to register,
         // 3. Insert n grades to the student
 
+            cout << "You pressed B\n";
 
+            goto programstart;
 
-    } else if (inputAsk == input[4] || inputAsk == input[5]) { // - PRINT STUDENT DETAILS (C)
+        } else if (inputAsk == input[4] || inputAsk == input[5]) { // - PRINT STUDENT DETAILS (C)
 
-        
+            cout << "You pressed C\n";
 
-    } else if (inputAsk == input[6] || inputAsk == input[7]) { // - PRINT DETAILS FOR CLASS (D)
+            goto programstart;
 
+        } else if (inputAsk == input[6] || inputAsk == input[7]) { // - PRINT DETAILS FOR CLASS (D)
 
+            cout << "You pressed D\n";
 
-    } else if (inputAsk == input[8] || inputAsk == input[9]) { // - PRINT STUDENT W/ BEST AVERAGE (E)
+            goto programstart;
 
+        } else if (inputAsk == input[8] || inputAsk == input[9]) { // - PRINT STUDENT W/ BEST AVERAGE (E)
 
+            cout << "You pressed E\n";
 
-    } else if (inputAsk == input[10] || inputAsk == input[11]) { // - END PROGRAM (X)
+            goto programstart;
 
-        return 0;
+        } else if (inputAsk == input[10] || inputAsk == input[11]) { // - END PROGRAM (X)
 
+            return 0;
+
+        }
     }
 
     
 
     /*
-    for (int i = 0; i <= 1; ++i) {
+    for (int i = 0; i < 1; ++i) {
 
     debugPrint1(studentSelect, i);
 
