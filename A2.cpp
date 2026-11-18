@@ -17,7 +17,7 @@ using namespace std;
 struct students {
 
     public:
-    int regNum = 0;
+    int regNum;
     string name;
     string surname;
     int year;
@@ -64,6 +64,7 @@ string getStudentFullName(struct students *studentSelect, int i) {
 int main() {
     
     int i;
+    int registeredStudentNum = 0;
     // defining functions
     studentSelect[i].getStudentDataMAIN = getStudentData;
     studentSelect[i].debugPrint1MAIN = debugPrint1;
@@ -72,7 +73,7 @@ int main() {
     while (true) {
 
         programstart:
-        cout << "== STUDENTS' REGISTER ==\nPlease choose an option:\nA - Register a new student\nB - Register grade\nC - View a student's details\nD - View a class' students\nE - View the best student's details\nX - Exit\n";
+        cout << "\n== STUDENTS' REGISTER ==\nPlease choose an option:\nA - Register a new student\nB - Register grade\nC - View a student's details\nD - View a class' students\nE - View the best student's details\nX - Exit\n";
         string input[12] = {"A", "a", "B", "b", "C", "c", "D", "d", "E", "e", "X", "x"};
         string inputAsk;
         cin >> inputAsk;
@@ -83,7 +84,9 @@ int main() {
         
                 getStudentData(studentSelect, i);
 
-                cout << "STUDENT '" << getStudentFullName(studentSelect, i) << "' HAS BEEN REGISTERED SUCCESSFULLY.\n";
+                cout << "\nSTUDENT '" << getStudentFullName(studentSelect, i) << "' HAS BEEN REGISTERED SUCCESSFULLY.\n";
+
+                ++registeredStudentNum;
 
             }
 
@@ -97,8 +100,47 @@ int main() {
         // 1. Ask for regnum until a valid one is entered,
         // 2. Ask grade amount "n" the user wants to register,
         // 3. Insert n grades to the student
+            
+            regNumAsk:            
+            int inputREGNUM;
+            bool regNumFound; 
+            regNumFound == false; // Results unused if this line doesn't exist, for some reason..
 
-            cout << "You pressed B\n";
+            cout << "Please insert a valid registration number: ";
+            cin >> inputREGNUM;
+
+            for (i = 0; i < registeredStudentNum; ++i) { // RESEARCH SYSTEM
+                
+                if (inputREGNUM == studentSelect[i].regNum) { // RESEARCH SYSTEM WHEN FOUND
+
+                    regNumFound = true;
+                    int gradeNAsk = 0;
+
+                    cout << "Please insert how many grades you'd like to register: ";
+                    cin >> gradeNAsk;
+
+                    for (int j = 0; j < gradeNAsk; ++j) {
+
+                        float grade;
+
+                        cout << "Insert grade no." << (j + 1) << ": ";
+                        cin >> grade;
+
+                        studentSelect[i].grades.push_back(grade);
+
+                    }
+
+                }
+
+            }
+
+            while (regNumFound = false) { // RESEARCH SYSTEM WHEN NOT FOUND
+                
+                goto regNumAsk;
+
+            }
+
+            cout << "\nGRADES FOR STUDENT '" << getStudentFullName(studentSelect, i) << "' HAVE BEEN REGISTERED SUCCESSFULLY.\n";
 
             goto programstart;
 
