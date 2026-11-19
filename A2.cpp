@@ -103,8 +103,7 @@ int main() {
             
             regNumAsk:            
             int inputREGNUM;
-            bool regNumFound; 
-            regNumFound == false; // Results unused if this line doesn't exist, for some reason..
+            bool regNumFound = false; // Results unused if this line doesn't exist, for some reason..
 
             cout << "Please insert a valid registration number: ";
             cin >> inputREGNUM;
@@ -134,15 +133,19 @@ int main() {
 
             }
 
-            while (regNumFound = false) { // RESEARCH SYSTEM WHEN NOT FOUND
+            if (regNumFound = true) {
+
+                cout << "\nGRADES FOR STUDENT '" << getStudentFullName(studentSelect, i) << "' HAVE BEEN REGISTERED SUCCESSFULLY.\n";
+
+                goto programstart;
+
+            }
+            
+            if (!regNumFound) { // RESEARCH SYSTEM WHEN NOT FOUND
                 
                 goto regNumAsk;
 
             }
-
-            cout << "\nGRADES FOR STUDENT '" << getStudentFullName(studentSelect, i) << "' HAVE BEEN REGISTERED SUCCESSFULLY.\n";
-
-            goto programstart;
 
         } else if (inputAsk == input[4] || inputAsk == input[5]) { // - PRINT STUDENT DETAILS (C)
 
