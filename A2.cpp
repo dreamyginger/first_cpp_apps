@@ -64,7 +64,7 @@ string getStudentFullName(struct students *studentSelect, int i) {
 int main() {
     
     int i;
-    int registeredStudentNum = 0;
+    int registeredStudentNum = 10;
     // defining functions
     studentSelect[i].getStudentDataMAIN = getStudentData;
     studentSelect[i].debugPrint1MAIN = debugPrint1;
@@ -105,7 +105,7 @@ int main() {
             int inputREGNUM;
             bool regNumFound = false; // Results unused if this line doesn't exist, for some reason..
 
-            cout << "Please insert a valid registration number: ";
+            cout << "Please insert a valid registration number: "; // !! Digiting 0 provides an unregistered student VALID input!!!
             cin >> inputREGNUM;
 
             for (i = 0; i < registeredStudentNum; ++i) { // RESEARCH SYSTEM
@@ -129,23 +129,20 @@ int main() {
 
                     }
 
+                } else if (!regNumFound) {
+
+                    goto regNumAsk;
                 }
 
             }
-
+            
             if (regNumFound = true) {
 
                 cout << "\nGRADES FOR STUDENT '" << getStudentFullName(studentSelect, i) << "' HAVE BEEN REGISTERED SUCCESSFULLY.\n";
 
                 goto programstart;
 
-            }
-            
-            if (!regNumFound) { // RESEARCH SYSTEM WHEN NOT FOUND
-                
-                goto regNumAsk;
-
-            }
+            }            
 
         } else if (inputAsk == input[4] || inputAsk == input[5]) { // - PRINT STUDENT DETAILS (C)
 
