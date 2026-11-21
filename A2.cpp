@@ -10,6 +10,10 @@
 
 // Approach: define every function first, and test each before working on another. Later on, make the whole program
 
+// TO-DO:
+// 1. Task B, C - input = 0 gives a ghost student;
+// 2. Turn owercase to uppercase when taking section input;
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -25,7 +29,7 @@ struct students {
     vector<float> grades;
 
     void (*getStudentDataMAIN) (struct students *, int);
-    void (*debugPrint1MAIN) (struct students *, int);
+    void (*detailsPrintMAIN) (struct students *, int);
     string (*getStudentFullNameMAIN) (struct students *, int);
 
 };
@@ -36,7 +40,6 @@ students studentSelect[10]; // MAX 10 STUDENTS
 
 void getStudentData(struct students *studentSelect, int i) {
 
-    cout << "== REGISTERING STUDENT NO." << i + 1 << " ==\n"; // i starts from 0
     cout << "Name: ";
     cin >> studentSelect[i].name;
     cout << "Surname: ";
@@ -50,10 +53,13 @@ void getStudentData(struct students *studentSelect, int i) {
 
 }
 
-void debugPrint1(struct students *studentSelect, int i) {
+void detailsPrint(struct students *studentSelect, int i) {
     
-    cout << "== PRINTING STUDENT NO." << i + 1 << "==\n";
-    cout << studentSelect[i].name << " " << studentSelect[i].surname << " " << studentSelect[i].year << " " << studentSelect[i].section << " " << studentSelect[i].regNum << "\n";
+    cout << "\n== STUDENT INFO ==";
+    cout << "\nName: " << studentSelect[i].name;
+    cout << "\nSurname: " << studentSelect[i].surname;
+    cout << "\nClass: " << studentSelect[i].year << studentSelect[i].section;
+    cout << "\nRegistration number: " << studentSelect[i].regNum << "\n";
 }
 
 string getStudentFullName(struct students *studentSelect, int i) {
@@ -67,7 +73,7 @@ int main() {
     int registeredStudentNum = 10;
     // defining functions
     studentSelect[i].getStudentDataMAIN = getStudentData;
-    studentSelect[i].debugPrint1MAIN = debugPrint1;
+    studentSelect[i].detailsPrintMAIN = detailsPrint;
     studentSelect[i].getStudentFullNameMAIN = getStudentFullName;
 
     while (true) {
@@ -81,7 +87,9 @@ int main() {
         if (inputAsk == input[0] || inputAsk == input[1]) { // "A" or "a" - INSERT STUDENT DATA (A)
         
             for (int i = 0; i < 1; ++i) {
-        
+                
+                cout << "== STUDENT REGISTRATION SYSTEM - REGISTERING STUDENT NO. " << i + 1 << " ==\n";
+
                 getStudentData(studentSelect, i);
 
                 cout << "\nSTUDENT '" << getStudentFullName(studentSelect, i) << "' HAS BEEN REGISTERED SUCCESSFULLY.\n";
@@ -101,11 +109,11 @@ int main() {
         // 2. Ask grade amount "n" the user wants to register,
         // 3. Insert n grades to the student
             
-            regNumAsk:            
+            regNumAskGrade:            
             int inputREGNUM;
             bool regNumFound = false; // Results unused if this line doesn't exist, for some reason..
 
-            cout << "Please insert a valid registration number: "; // !! Digiting 0 provides an unregistered student VALID input!!!
+            cout << "== STUDENT GRADE SYSTEM ==\nPlease insert a valid registration number: "; // !! Digiting 0 provides an unregistered student VALID input!!!
             cin >> inputREGNUM;
 
             for (i = 0; i < registeredStudentNum; ++i) { // RESEARCH SYSTEM
@@ -131,7 +139,7 @@ int main() {
 
                 } else if (!regNumFound) {
 
-                    goto regNumAsk;
+                    goto regNumAskGrade;
                 }
 
             }
@@ -146,7 +154,33 @@ int main() {
 
         } else if (inputAsk == input[4] || inputAsk == input[5]) { // - PRINT STUDENT DETAILS (C)
 
-            cout << "You pressed C\n";
+        // C. Print details (name, surname, year + branch and grades' average) of a student identified with a registration number;
+
+        // APPROACH:
+        // 1. Paste previous research system
+        // 2. Create a (new) function for printing details (like previously done for debugprint1)
+        // 3. Change research system with needed data
+
+            regNumAskInfo:            
+            int inputREGNUM;
+            bool regNumFound = false; // Results unused if this line doesn't exist, for some reason..
+                    
+            cout << "== STUDENT INFO SYSTEM ==\nPlease insert a valid registration number: "; // !! Digiting 0 provides an unregistered student VALID input!!!
+            cin >> inputREGNUM;
+
+            for (i = 0; i < registeredStudentNum; ++i) { // RESEARCH SYSTEM
+                
+                if (inputREGNUM == studentSelect[i].regNum) { // RESEARCH SYSTEM WHEN FOUND
+
+                    regNumFound = true;
+
+                    detailsPrint(studentSelect, i);
+
+                } else if (!regNumFound) {
+
+                    goto regNumAskInfo;
+                }
+            }
 
             goto programstart;
 
@@ -168,15 +202,5 @@ int main() {
 
         }
     }
-
-    
-
-    /*
-    for (int i = 0; i < 1; ++i) {
-
-    debugPrint1(studentSelect, i);
-
-    }
-    */
 
 }
