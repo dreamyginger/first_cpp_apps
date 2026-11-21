@@ -11,8 +11,7 @@
 // Approach: define every function first, and test each before working on another. Later on, make the whole program
 
 // TO-DO:
-// 1. Task B, C - input = 0 gives a ghost student;
-// 2. Turn owercase to uppercase when taking section input;
+// 1. Task B, C - input = 0 gives a ghost student
 
 #include <iostream>
 #include <vector>
@@ -40,6 +39,8 @@ students studentSelect[10]; // MAX 10 STUDENTS
 
 void getStudentData(struct students *studentSelect, int i) {
 
+    char sectionPlaceholder;
+
     cout << "Name: ";
     cin >> studentSelect[i].name;
     cout << "Surname: ";
@@ -47,7 +48,13 @@ void getStudentData(struct students *studentSelect, int i) {
     cout << "Year: ";
     cin >> studentSelect[i].year;
     cout << "Section: ";
-    cin >> studentSelect[i].section;
+    cin >> sectionPlaceholder;
+    
+    if (islower(sectionPlaceholder)) {
+        studentSelect[i].section = toupper(sectionPlaceholder);
+
+    }
+
     cout << "Registration number: ";
     cin >> studentSelect[i].regNum;
 
@@ -186,7 +193,12 @@ int main() {
 
         } else if (inputAsk == input[6] || inputAsk == input[7]) { // - PRINT DETAILS FOR CLASS (D)
 
-            cout << "You pressed D\n";
+        // D. Print details about every student of a class;
+
+        // APPROACH:
+        // 1. Turn section char from lowercase to uppercase
+        // 2. Get existing class
+        // 3. print studentsssss
 
             goto programstart;
 
