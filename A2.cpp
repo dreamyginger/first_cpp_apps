@@ -12,6 +12,7 @@
 
 // TO-DO:
 // 1. Task B, C - input = 0 gives a ghost student
+// 3. Make a func or something to get main() input from lowercase to uppercase
 
 #include <iostream>
 #include <vector>
@@ -40,11 +41,25 @@ students studentSelect[10]; // MAX 10 STUDENTS
 void getStudentData(struct students *studentSelect, int i) {
 
     char sectionPlaceholder;
+    string namePlaceholder;
+    string surnamePlaceholder;
 
     cout << "Name: ";
-    cin >> studentSelect[i].name;
+    cin >> namePlaceholder;
+
+    if (islower(namePlaceholder[0])) {
+        namePlaceholder[0] = toupper(namePlaceholder[0]);
+        studentSelect[i].name = namePlaceholder;
+    }
+
     cout << "Surname: ";
-    cin >> studentSelect[i].surname;
+    cin >> surnamePlaceholder;
+    
+    if (islower(surnamePlaceholder[0])) {
+        surnamePlaceholder[0] = toupper(surnamePlaceholder[0]);
+        studentSelect[i].surname = surnamePlaceholder;
+    }
+    
     cout << "Year: ";
     cin >> studentSelect[i].year;
     cout << "Section: ";
