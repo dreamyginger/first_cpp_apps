@@ -238,8 +238,8 @@ int main() {
             cout << "== CLASS INFO SYSTEM ==\nPlease insert a valid class: "; 
             cin >> inputClass;
 
-            if (islower(inputClass[2])) { // If input is in lowercase, turn it into caps
-                toupper(inputClass[2]);
+            if (islower(inputClass[1])) { // If input is in lowercase, turn it into caps
+                inputClass[1] = toupper(inputClass[1]);
 
             }
 
