@@ -24,13 +24,15 @@ struct students {
     int regNum;
     string name;
     string surname;
-    int year;
+    char year;
     char section;
+    string class_room;
     vector<float> grades;
 
     void (*getStudentDataMAIN) (struct students *, int);
     void (*detailsPrintMAIN) (struct students *, int);
     string (*getStudentFullNameMAIN) (struct students *, int);
+    void (*detailsClassPrintMAIN) (struct students *, int);
 
 };
 
@@ -40,25 +42,27 @@ students studentSelect[10]; // MAX 10 STUDENTS
 
 void getStudentData(struct students *studentSelect, int i) {
 
-    char sectionPlaceholder;
     string namePlaceholder;
     string surnamePlaceholder;
+    char sectionPlaceholder;
 
     cout << "Name: ";
     cin >> namePlaceholder;
 
     if (islower(namePlaceholder[0])) {
         namePlaceholder[0] = toupper(namePlaceholder[0]);
-        studentSelect[i].name = namePlaceholder;
-    }
+
+    } 
+    studentSelect[i].name = namePlaceholder;
 
     cout << "Surname: ";
     cin >> surnamePlaceholder;
     
     if (islower(surnamePlaceholder[0])) {
         surnamePlaceholder[0] = toupper(surnamePlaceholder[0]);
-        studentSelect[i].surname = surnamePlaceholder;
-    }
+
+    } 
+    studentSelect[i].surname = surnamePlaceholder;
     
     cout << "Year: ";
     cin >> studentSelect[i].year;
@@ -66,9 +70,10 @@ void getStudentData(struct students *studentSelect, int i) {
     cin >> sectionPlaceholder;
     
     if (islower(sectionPlaceholder)) {
-        studentSelect[i].section = toupper(sectionPlaceholder);
+        sectionPlaceholder = toupper(sectionPlaceholder);
 
-    }
+    } 
+    studentSelect[i].section = sectionPlaceholder;
 
     cout << "Registration number: ";
     cin >> studentSelect[i].regNum;
@@ -89,14 +94,20 @@ string getStudentFullName(struct students *studentSelect, int i) {
     return studentSelect[i].name + " " + studentSelect[i].surname;
 }
 
+void detailsClassPrint(struct students *studentSelect, int i) {
+
+    cout << studentSelect[i].class_room << "found";
+}
+
 int main() {
     
     int i;
-    int registeredStudentNum = 10;
+    int registeredStudentNum = 0; // Set different value for debug
     // defining functions
     studentSelect[i].getStudentDataMAIN = getStudentData;
     studentSelect[i].detailsPrintMAIN = detailsPrint;
     studentSelect[i].getStudentFullNameMAIN = getStudentFullName;
+    studentSelect[i].detailsClassPrintMAIN = detailsClassPrint;
 
     while (true) {
 
@@ -114,7 +125,12 @@ int main() {
 
                 getStudentData(studentSelect, i);
 
+                studentSelect[i].class_room += studentSelect[i].year;
+                studentSelect[i].class_room += studentSelect[i].section;
+
                 cout << "\nSTUDENT '" << getStudentFullName(studentSelect, i) << "' HAS BEEN REGISTERED SUCCESSFULLY.\n";
+
+                cout << studentSelect[i].class_room; // DEBUG
 
                 ++registeredStudentNum;
 
@@ -133,7 +149,7 @@ int main() {
             
             regNumAskGrade:            
             int inputREGNUM;
-            bool regNumFound = false; // Results unused if this line doesn't exist, for some reason..
+            bool regNumFound = false;
 
             cout << "== STUDENT GRADE SYSTEM ==\nPlease insert a valid registration number: "; // !! Digiting 0 provides an unregistered student VALID input!!!
             cin >> inputREGNUM;
@@ -185,7 +201,7 @@ int main() {
 
             regNumAskInfo:            
             int inputREGNUM;
-            bool regNumFound = false; // Results unused if this line doesn't exist, for some reason..
+            bool regNumFound = false;
                     
             cout << "== STUDENT INFO SYSTEM ==\nPlease insert a valid registration number: "; // !! Digiting 0 provides an unregistered student VALID input!!!
             cin >> inputREGNUM;
@@ -214,6 +230,32 @@ int main() {
         // 1. Turn section char from lowercase to uppercase
         // 2. Get existing class
         // 3. print studentsssss
+
+            classAsk:            
+            string inputClass;
+            bool classFound = false;
+                    
+            cout << "== CLASS INFO SYSTEM ==\nPlease insert a valid class: "; 
+            cin >> inputClass;
+
+            if (islower(inputClass[2])) { // If input is in lowercase, turn it into caps
+                toupper(inputClass[2]);
+
+            }
+
+            for (i = 0; i < registeredStudentNum; ++i) { // RESEARCH SYSTEM
+                
+                if (inputClass == studentSelect[i].class_room) { // RESEARCH SYSTEM WHEN FOUND
+
+                    classFound = true;
+
+                    detailsClassPrint(studentSelect, i);
+
+                } else if (!classFound) {
+
+                    goto classAsk;
+                }
+            }
 
             goto programstart;
 
