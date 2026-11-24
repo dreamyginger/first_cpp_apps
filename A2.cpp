@@ -12,7 +12,7 @@
 
 // TO-DO:
 // 1. Task B, C - input = 0 gives a ghost student
-// 3. Make a func or something to get main() input from lowercase to uppercase
+// 4. Task C - grade average is missing
 
 #include <iostream>
 #include <vector>
@@ -32,11 +32,13 @@ struct students {
     void (*getStudentDataMAIN) (struct students *, int);
     void (*detailsPrintMAIN) (struct students *, int);
     string (*getStudentFullNameMAIN) (struct students *, int);
-    void (*detailsClassPrintMAIN) (struct students *, int);
+    void (*getClassStudentsMAIN) (struct students *, int, string);
+    void (*detailsClassPrintMAIN) (struct students *, int, string, string, int, int);
 
 };
 
 students studentSelect[10]; // MAX 10 STUDENTS
+int registeredStudentNum = 0; // Set different value for debug
 
 // FUNCTIONS
 
@@ -94,19 +96,51 @@ string getStudentFullName(struct students *studentSelect, int i) {
     return studentSelect[i].name + " " + studentSelect[i].surname;
 }
 
-void detailsClassPrint(struct students *studentSelect, int i) {
+void getClassStudents(struct students *studentSelect, int i, string inputClass) {
 
-    cout << studentSelect[i].class_room << "found";
+    // Create an array of i values of the same students matching class to memorize it
+
+    int c; // memorized class index
+    int s = 0; // memorized student index
+    string indexClass[c][s];
+
+    for (i = 0; i < 10; ++i) {
+
+        if (studentSelect[i].class_room == inputClass) {
+
+            indexClass[c][s] = studentSelect[i].class_room;
+            ++s;
+
+        }
+    }
+
+    ++c;
+
+}
+
+void detailsClassPrint(struct students *studentSelect, int i, string inputClass, string indexClass, int c, int s) {
+
+    getClassStudents(studentSelect, i, inputClass);
+    
+    for (i = 0, c = 0; i < 10; ++i) {
+        
+        c;
+        s;
+        string indexClass[c][s];
+        cout << indexClass[c][s];
+
+        ++c;
+    }
 }
 
 int main() {
     
     int i;
-    int registeredStudentNum = 0; // Set different value for debug
     // defining functions
     studentSelect[i].getStudentDataMAIN = getStudentData;
     studentSelect[i].detailsPrintMAIN = detailsPrint;
     studentSelect[i].getStudentFullNameMAIN = getStudentFullName;
+    studentSelect[i].getClassStudentsMAIN = getClassStudents;
     studentSelect[i].detailsClassPrintMAIN = detailsClassPrint;
 
     while (true) {
@@ -129,8 +163,6 @@ int main() {
                 studentSelect[i].class_room += studentSelect[i].section;
 
                 cout << "\nSTUDENT '" << getStudentFullName(studentSelect, i) << "' HAS BEEN REGISTERED SUCCESSFULLY.\n";
-
-                cout << studentSelect[i].class_room; // DEBUG
 
                 ++registeredStudentNum;
 
@@ -231,6 +263,10 @@ int main() {
         // 2. Get existing class
         // 3. print studentsssss
 
+        // Approach for defining class:
+        // Create a func that gets every student of the same class
+        // Add the func into another func that prints them all in alphabetical order (detailsClassPrint())
+
             classAsk:            
             string inputClass;
             bool classFound = false;
@@ -249,7 +285,11 @@ int main() {
 
                     classFound = true;
 
-                    detailsClassPrint(studentSelect, i);
+                    string indexClass;
+                    int c;
+                    int s;
+
+                    detailsClassPrint(studentSelect, i, inputClass, indexClass, c, s);
 
                 } else if (!classFound) {
 
